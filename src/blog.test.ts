@@ -9,7 +9,8 @@ import {
 import { fromFileUrl, join } from "@std/path";
 
 const BLOG_URL = new URL("../content/main.js", import.meta.url).href;
-const TESTDATA_PATH = fromFileUrl(new URL("../content/", import.meta.url));
+const TESTDATA_PATH = fromFileUrl(new URL("../testdata/", import.meta.url));
+const CONTENT_PATH = fromFileUrl(new URL("../content/", import.meta.url));
 const BLOG_SETTINGS = await configureBlog(BLOG_URL, false, {
   author: "The author",
   title: "Test blog",
@@ -269,7 +270,7 @@ Deno.test("static files in posts/ directory", async () => {
     const bytes = new Uint8Array(await resp.arrayBuffer());
     assertEquals(
       bytes,
-      await Deno.readFile(join(TESTDATA_PATH, "./posts/first/hello.png")),
+      await Deno.readFile(join(CONTENT_PATH, "./posts/first/hello.png")),
     );
   }
   {
@@ -282,7 +283,7 @@ Deno.test("static files in posts/ directory", async () => {
     const bytes = new Uint8Array(await resp.arrayBuffer());
     assertEquals(
       bytes,
-      await Deno.readFile(join(TESTDATA_PATH, "./posts/second/hello2.png")),
+      await Deno.readFile(join(CONTENT_PATH, "./posts/second/hello2.png")),
     );
   }
 });
@@ -293,7 +294,7 @@ Deno.test("static files in root directory", async () => {
   assertEquals(resp.status, 200);
   assertEquals(resp.headers.get("content-type"), "image/png");
   const bytes = new Uint8Array(await resp.arrayBuffer());
-  assertEquals(bytes, await Deno.readFile(join(TESTDATA_PATH, "./cat.png")));
+  assertEquals(bytes, await Deno.readFile(join(CONTENT_PATH, "./cat.png")));
 });
 
 Deno.test("RSS feed", async () => {

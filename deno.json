@@ -1,7 +1,8 @@
 {
   "tasks": {
-    "start": "deno run --allow-net --allow-read --allow-env=NODE_DEBUG,NO_COLOR,FORCE_COLOR,TERM --watch --no-check index.ts --dev",
-    "test": "deno test --allow-net --allow-read --allow-env=NODE_DEBUG,NO_COLOR,FORCE_COLOR,TERM --no-check=remote"
+    "dev": "deno run --allow-net --allow-read --allow-env=NODE_DEBUG,NO_COLOR,FORCE_COLOR,TERM --watch --no-check ./content/main.tsx --dev",
+    "test": "deno test --allow-net --allow-read --allow-env=NODE_DEBUG,NO_COLOR,FORCE_COLOR,TERM --no-check=remote",
+    "serve": "deno run --allow-net --allow-read --allow-env --no-check ./content/main.tsx"
   },
   "imports": {
     "@deno/gfm": "jsr:@deno/gfm@^0.10.0",

@@ -1,4 +1,4 @@
-import blog from "./src/blog.tsx";
+import blog from "../src/blog.tsx";
 
 blog({
   author: "Dino",
@@ -6,7 +6,6 @@ blog({
   description: "The blog description.",
   avatar: "https://deno-avatar.deno.dev/avatar/blog.svg",
   avatarClass: "rounded-full",
-  rootDirectory: "./content",
   links: [
     { title: "bot@deno.com", url: "mailto:bot@deno.com" },
     { title: "GitHub", url: "https://github.com/denobot" },

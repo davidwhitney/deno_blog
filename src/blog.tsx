@@ -45,7 +45,7 @@ import type {
   BlogSettings,
   BlogState,
   Post,
-} from "./types.d.ts";
+} from "../types.d.ts";
 import { WalkEntry } from "@std/fs";
 
 // Add syntax highlighting support for C by default

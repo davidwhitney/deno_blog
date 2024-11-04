@@ -9,7 +9,7 @@
 
 import * as gfm from "@deno/gfm";
 import { h } from "@denoland/htm";
-import type { BlogState, DateFormat, Post } from "./types.d.ts";
+import type { BlogState, DateFormat, Post } from "../types.d.ts";
 
 const socialAppIcons = new Map([
   ["github.com", IconGithub],

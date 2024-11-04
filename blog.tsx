@@ -6,30 +6,39 @@
 /// <reference lib="dom.asynciterable" />
 /// <reference lib="deno.ns" />
 
+import { serveDir } from "@std/http/file-server";
+import { walk } from "@std/fs";
 import {
-  callsites,
-  ColorScheme,
-  createReporter,
   dirname,
-  Feed,
-  Fragment,
   fromFileUrl,
-  frontMatter,
-  gfm,
-  h,
-  html,
-  HtmlOptions,
   join,
   relative,
-  removeMarkdown,
+} from "@std/path";
+import {
+  type ConnInfo,
   serve,
-  serveDir,
-  UnoCSS,
-  walk,
-} from "./deps.ts";
-import { pooledMap } from "https://deno.land/std@0.187.0/async/pool.ts";
+} from "https://deno.land/std@0.193.0/http/mod.ts";
+import { extract as frontMatter } from "@std/front-matter/any";
+
+import * as gfm from "@deno/gfm";
+import { Fragment, h } from "@denoland/htm";
+import {
+  default as html,
+  type HtmlOptions,
+} from "@denoland/htm";
+
+import {
+  createReporter,
+} from "@denoland/g_a";
+import { default as callsites } from "@githubcontent/kt3k/callsites";
+import { Feed, type Item as FeedItem } from "@esm/feed";
+import { default as removeMarkdown } from "@esm/remove-markdown";
+
+import UnoCSS from "@denoland/htm/plugins/unocss";
+import ColorScheme from "@denoland/htm/plugins/color-scheme";
+
+import { pooledMap } from "@std/async";
 import { Index, PostPage } from "./components.tsx";
-import type { ConnInfo, FeedItem } from "./deps.ts";
 import type {
   BlogContext,
   BlogMiddleware,
@@ -37,7 +46,11 @@ import type {
   BlogState,
   Post,
 } from "./types.d.ts";
-import { WalkEntry } from "https://deno.land/std@0.176.0/fs/walk.ts";
+import { WalkEntry } from "@std/fs";
+
+// Add syntax highlighting support for C by default
+import "https://esm.sh/prismjs@1.29.0/components/prism-c?no-check";
+
 
 export { Fragment, h };
 
@@ -231,7 +244,8 @@ async function watchForChanges(postsDirectory: string) {
             HMR_SOCKETS.forEach((socket) => {
               socket.send("refresh");
             });
-          } catch (err) {
+          // deno-lint-ignore no-explicit-any
+          } catch (err: any) {
             console.error(`loadPost ${path} error:`, err.message);
           }
         }
@@ -433,7 +447,8 @@ export async function handler(
   try {
     await Deno.lstat(join(blogState.directory, "./posts", pathname));
     fsRoot = join(blogState.directory, "./posts");
-  } catch (e) {
+  // deno-lint-ignore no-explicit-any
+  } catch (e: any) {
     if (!(e instanceof Deno.errors.NotFound)) {
       console.error(e);
       return new Response(e.message, { status: 500 });
@@ -551,7 +566,8 @@ export function redirects(redirectMap: Record<string, string>): BlogMiddleware {
     }
     try {
       return await ctx.next();
-    } catch (e) {
+    // deno-lint-ignore no-explicit-any
+    } catch (e: any) {
       console.error(e);
       return new Response(`Internal server error: ${e.message}`, {
         status: 500,

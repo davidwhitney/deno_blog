@@ -17,7 +17,7 @@ import {
 import {
   type ConnInfo,
   serve,
-} from "https://deno.land/std@0.193.0/http/mod.ts";
+} from "@outdated/std-http";
 import { extract as frontMatter } from "@std/front-matter/any";
 
 import * as gfm from "@deno/gfm";
@@ -49,7 +49,7 @@ import type {
 import { WalkEntry } from "@std/fs";
 
 // Add syntax highlighting support for C by default
-import "https://esm.sh/prismjs@1.29.0/components/prism-c?no-check";
+import "@esm/prism-c";
 
 
 export { Fragment, h };

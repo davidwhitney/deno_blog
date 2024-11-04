@@ -19,6 +19,7 @@
     "@githubcontent/kt3k/callsites": "https://raw.githubusercontent.com/kt3k/callsites/v1.0.0/mod.ts",
     "@esm/feed": "https://esm.sh/feed@4.2.2",
     "@esm/remove-markdown": "https://esm.sh/remove-markdown@0.5.0",
-    "@esm/prism-c": "https://esm.sh/prismjs@1.29.0/components/prism-c?no-check"
+    "@esm/prism-c": "https://esm.sh/prismjs@1.29.0/components/prism-c?no-check",
+    "@outdated/std-http": "https://deno.land/std@0.193.0/http/mod.ts"
   }
 }

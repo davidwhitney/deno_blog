@@ -1,7 +1,7 @@
 // Copyright 2022 the Deno authors. All rights reserved. MIT license.
 import UnoCSS from "@denoland/htm/plugins/unocss";
 import { VNode } from "@denoland/htm";
-import type { ConnInfo } from "https://deno.land/std@0.193.0/http/mod.ts";
+import type { ConnInfo } from "@outdated/std-http";
 
 type UnoConfig = typeof UnoCSS extends (
   arg: infer P | undefined,
